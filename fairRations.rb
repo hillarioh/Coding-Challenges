@@ -8,14 +8,10 @@ def fairRations(b)
     (b.length).times do  |x|
       odds +=1 if x.odd?
     end
-
-    
     return 'NO' if b.length ==2 && odds==1
-    sum= odds if b.length ==1 && odds==1
     sum = odds
   else
     while k < b.length-1
-          # p b
               if b[k].odd? && b[k+1].odd?
                   b[k]+=1
                   b[k+1]+=1
