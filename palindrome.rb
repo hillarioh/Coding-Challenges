@@ -16,4 +16,8 @@ def palindromeIndex(s)
        end
        return -1;
    
-   end
+end
+
+def isPal(str)
+    str == str.reverse 
+end
