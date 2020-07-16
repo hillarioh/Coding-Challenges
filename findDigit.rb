@@ -20,3 +20,18 @@ def findDigits(n)
 
 
 end
+
+//another sol
+count=n.to_s.split('').count{|v| v.to_i!=0 && n%v.to_i==0}
+
+//another sol2
+def findDigits(n)
+  splt = n.to_s.split('')
+  count = 0
+  splt.each do |num|
+    if num.to_i != 0 && n % num.to_i == 0
+      count += 1
+    end
+  end
+  return count
+end
