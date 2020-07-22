@@ -66,12 +66,8 @@ class LinkedList
 
 
         i=0 
-
            current_node=@head
            while i<index 
-            if current_node.next_node==nil
-              return "Out of range"
-            end
               current_node= current_node.next_node
               i+=1
            end
@@ -79,25 +75,15 @@ class LinkedList
     end
 
     def add_to(index,item)
+      
       if index ==0
-      initial_head = @head
-      @head = Node.new(item)
-      @head.next_node = initial_head
-      return
+        @head = Node.new(item,@head)
+      else
+        current_node = get_node(index-1)
+        initial_next = current_node.next_node
+        current_node.next_node = Node.new(item,initial_next)
       end
 
-      current_node=@head
-      i =0 
-      while i<index
-        if index-1 == i
-          initial_next = current_node.next_node
-          current_node.next_node = Node.new(item)
-          current_node.next_node.next_node = initial_next
-        else
-         current_node= current_node.next_node
-        end
-        i+=1
-      end
     end
 
     def remove(index)
@@ -105,23 +91,25 @@ class LinkedList
 
       if index ==0
         @head = @head.next_node
-        return
+      else
+        current_node = get_node(index-1)
+        current_node.next_node = current_node.next_node.next_node
       end
 
+    end
+
+    private 
+    def get_node(index)
+      if index==-1
+        return @head
+      end
+      i=0 
       current_node=@head
-      i =0 
-
-      while i<index
-        if current_node.next_node==nil
-          return "Out of range"
-        end
-        if index-1 == i
-          current_node.next_node = current_node.next_node.next_node
-        else
-         current_node= current_node.next_node
-        end
-        i+=1
+      while i<index 
+          current_node= current_node.next_node
+          i+=1
       end
+      current_node
     end
 
 end
@@ -142,8 +130,10 @@ end
 myList = LinkedList.new
 myList.add(8)
 myList.add(3)
-myList.add_to(34,5)
-myList.add_to(2,4)
+myList.add(5)
+myList.add(2)
+myList.add_to(4,5)
+myList.add_to(0,4)
 
 # puts myList.count_nodes
 # puts myList.get(1)
