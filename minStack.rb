@@ -1,29 +1,58 @@
 class Node
-    attr_accessor :next_node
+    attr_accessor :next_node,:value
     def initialize(value,next_node=nil)
       @value = value
       @next_node = next_node
     end
   end
+
   class Stack
+
     def initialize
       @head = nil
-      @tail = nil
+      @least = nil
     end
   
     def push(number)
       # your code here
-      if @head.nil
-        
+      new_node = Node.new(number)
+      
+   
+      if @head.nil?
+        @head = new_node
+        @least = number
+      else
+        @least = number if number < @least
+        new_node.next_node = @head
+        @head = new_node
       end
+
     end
     
     def pop
       # your code here
+      return if @head.nil?
+      @head = @head.next_node
     end
     
     def min
       # your code here
+      return @least
+    end
+
+    def output
+      return if @head.nil?
+
+      arr = []
+
+      current = @head
+
+      while  current.next_node!=nil
+        arr << current.value
+        current = current.next_node
+      end
+
+      arr
     end
   
   end
@@ -33,6 +62,7 @@ class Node
   stack.push(5)
   puts stack.min
   # => 3
+  puts"output - #{stack.output}" 
   
   stack.pop
   stack.push(7)
@@ -46,3 +76,4 @@ class Node
   stack.pop
   puts stack.min
   # => 3
+  # puts stack.output
